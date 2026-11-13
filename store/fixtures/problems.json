@@ -1,0 +1,160 @@
+{
+  "domain": "www.travel.example",
+  "checkedAt": "2026-11-13T22:42:26.180Z",
+  "specVersion": "1.0",
+  "verdict": "broken",
+  "score": 38,
+  "summary": {
+    "pass": 5,
+    "fail": 9,
+    "warn": 3,
+    "skip": 0
+  },
+  "protocolVersion": "0.3",
+  "organizationName": "Example Travel",
+  "checks": [
+    {
+      "id": "poppy-json-fetch",
+      "title": "poppy.json is reachable",
+      "status": "pass",
+      "detail": "Served at https://www.travel.example/.well-known/poppy.json.",
+      "spec": "3",
+      "url": "https://www.travel.example/.well-known/poppy.json",
+      "group": "discovery"
+    },
+    {
+      "id": "poppy-json-parse",
+      "title": "poppy.json is a JSON object",
+      "status": "pass",
+      "detail": "Valid JSON, served as application/json.",
+      "spec": "3",
+      "group": "discovery"
+    },
+    {
+      "id": "protocol-version",
+      "title": "protocol_version is set",
+      "status": "warn",
+      "detail": "Version 0.3. Before 1.0, versions are compatible only with the same minor version, so personal agents built on 1.0 will skip this document. This checker validates against 1.0.",
+      "spec": "3.4",
+      "group": "discovery"
+    },
+    {
+      "id": "organization",
+      "title": "organization names the Company",
+      "status": "pass",
+      "detail": "Published by \"Example Travel\".",
+      "spec": "3.1",
+      "group": "discovery"
+    },
+    {
+      "id": "organization-domain",
+      "title": "organization.domain matches the serving host",
+      "status": "fail",
+      "detail": "organization.domain is travel.example, but www.travel.example served the document. Personal agents refuse a document copied to another host, and the www and apex hosts count as different hosts.",
+      "spec": "3",
+      "group": "discovery"
+    },
+    {
+      "id": "channels",
+      "title": "At least one channel is listed",
+      "status": "pass",
+      "detail": "Lists agent, apis, web.",
+      "spec": "3.1",
+      "group": "discovery"
+    },
+    {
+      "id": "https-only",
+      "title": "Every URL is HTTPS",
+      "status": "fail",
+      "detail": "Plain HTTP URLs at apis[0].url. Personal agents must not use them.",
+      "spec": "3",
+      "group": "discovery"
+    },
+    {
+      "id": "agent",
+      "title": "Company Agent entries are complete",
+      "status": "fail",
+      "detail": "agent.protocols[0].description is required.",
+      "spec": "8.1",
+      "group": "discovery"
+    },
+    {
+      "id": "apis",
+      "title": "API entries are complete",
+      "status": "fail",
+      "detail": "apis[0].url must be an HTTPS URL.",
+      "spec": "7",
+      "group": "discovery"
+    },
+    {
+      "id": "web",
+      "title": "Website settings are consistent",
+      "status": "fail",
+      "detail": "web.disabled is true, so browser_session_endpoint must not be listed.",
+      "spec": "6",
+      "group": "discovery"
+    },
+    {
+      "id": "protected-resource",
+      "title": "Protected resource metadata",
+      "status": "fail",
+      "detail": "resource is \"https://www.travel.example/\". It must be exactly \"https://www.travel.example\", with no trailing slash.",
+      "spec": "3.2",
+      "url": "https://www.travel.example/.well-known/oauth-protected-resource",
+      "group": "oauth"
+    },
+    {
+      "id": "test-agent",
+      "title": "Checker signs requests as a personal agent",
+      "status": "pass",
+      "detail": "Probes carry a Session JWT signed by https://www.travel.example/api/pap-checker/client, with aud https://www.travel.example, a fresh User ID and a fresh Session ID.",
+      "spec": "5.2",
+      "group": "session"
+    },
+    {
+      "id": "conversation-bare-https://www.travel.example/conv",
+      "title": "Conversations require a Session header: www.travel.example",
+      "status": "fail",
+      "detail": "Served a conversation without a Session header (HTTP 200). Conversations belong to a personal agent and User, so the header is required.",
+      "spec": "5.3",
+      "url": "https://www.travel.example/conv/BedGUQXhyn0Eyer_VV8dew/events",
+      "group": "interfaces"
+    },
+    {
+      "id": "conversation-signed-https://www.travel.example/conv",
+      "title": "Accepts a valid Session header: www.travel.example",
+      "status": "warn",
+      "detail": "Returned HTTP 200 for an unknown conversation. Expected 404 conversation_not_found.",
+      "spec": "5.3, 8.13",
+      "url": "https://www.travel.example/conv/BedGUQXhyn0Eyer_VV8dew/events",
+      "group": "session"
+    },
+    {
+      "id": "conversation-forged-https://www.travel.example/conv",
+      "title": "Rejects a forged Session header: www.travel.example",
+      "status": "fail",
+      "detail": "Accepted a Session JWT whose signature does not match (HTTP 200). Anyone could act as any User's personal agent here.",
+      "spec": "5.3",
+      "url": "https://www.travel.example/conv/BedGUQXhyn0Eyer_VV8dew/events",
+      "group": "session"
+    },
+    {
+      "id": "conversation-version-https://www.travel.example/conv",
+      "title": "Checks Poppy-Version: www.travel.example",
+      "status": "warn",
+      "detail": "A request that declares version 0.0 returned HTTP 200. An endpoint that verifies the Session header must also reject an unsupported Poppy-Version.",
+      "spec": "3.4",
+      "url": "https://www.travel.example/conv/BedGUQXhyn0Eyer_VV8dew/events",
+      "group": "session"
+    },
+    {
+      "id": "browser-session",
+      "title": "Browser-session page loads",
+      "status": "fail",
+      "detail": "Returned HTTP 404 without HTML and no form. The page gives the browser its one-time code.",
+      "spec": "6",
+      "url": "https://www.travel.example/bs",
+      "group": "interfaces"
+    }
+  ]
+}

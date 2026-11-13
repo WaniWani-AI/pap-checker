@@ -1,0 +1,229 @@
+{
+  "domain": "shop.example.com",
+  "checkedAt": "2026-11-13T22:42:26.056Z",
+  "specVersion": "1.0",
+  "verdict": "ready",
+  "score": 100,
+  "summary": {
+    "pass": 25,
+    "fail": 0,
+    "warn": 0,
+    "skip": 0
+  },
+  "protocolVersion": "1.0",
+  "organizationName": "Example Shop",
+  "checks": [
+    {
+      "id": "poppy-json-fetch",
+      "title": "poppy.json is reachable",
+      "status": "pass",
+      "detail": "Served at https://shop.example.com/.well-known/poppy.json.",
+      "spec": "3",
+      "url": "https://shop.example.com/.well-known/poppy.json",
+      "group": "discovery"
+    },
+    {
+      "id": "poppy-json-parse",
+      "title": "poppy.json is a JSON object",
+      "status": "pass",
+      "detail": "Valid JSON, served as application/json.",
+      "spec": "3",
+      "group": "discovery"
+    },
+    {
+      "id": "protocol-version",
+      "title": "protocol_version is set",
+      "status": "pass",
+      "detail": "Version 1.0.",
+      "spec": "3.4",
+      "group": "discovery"
+    },
+    {
+      "id": "organization",
+      "title": "organization names the Company",
+      "status": "pass",
+      "detail": "Published by \"Example Shop\".",
+      "spec": "3.1",
+      "group": "discovery"
+    },
+    {
+      "id": "organization-domain",
+      "title": "organization.domain matches the serving host",
+      "status": "pass",
+      "detail": "organization.domain is shop.example.com, the host that served the document.",
+      "spec": "3",
+      "group": "discovery"
+    },
+    {
+      "id": "channels",
+      "title": "At least one channel is listed",
+      "status": "pass",
+      "detail": "Lists agent, apis, web.",
+      "spec": "3.1",
+      "group": "discovery"
+    },
+    {
+      "id": "https-only",
+      "title": "Every URL is HTTPS",
+      "status": "pass",
+      "detail": "No plain HTTP URLs in the document.",
+      "spec": "3",
+      "group": "discovery"
+    },
+    {
+      "id": "agent",
+      "title": "Company Agent entries are complete",
+      "status": "pass",
+      "detail": "1 conversation endpoint(s), each with a type, endpoint and description.",
+      "spec": "8.1",
+      "group": "discovery"
+    },
+    {
+      "id": "apis",
+      "title": "API entries are complete",
+      "status": "pass",
+      "detail": "2 API(s), each with a type, URL and description.",
+      "spec": "7",
+      "group": "discovery"
+    },
+    {
+      "id": "web",
+      "title": "Website settings are consistent",
+      "status": "pass",
+      "detail": "Personal agents join their browser to the Session before browsing.",
+      "spec": "6",
+      "group": "discovery"
+    },
+    {
+      "id": "auth",
+      "title": "auth block is well formed",
+      "status": "pass",
+      "detail": "Scopes and hints are well formed.",
+      "spec": "3.1, 4.7",
+      "group": "discovery"
+    },
+    {
+      "id": "extensions",
+      "title": "Extensions are declared per version",
+      "status": "pass",
+      "detail": "Declares operations.",
+      "spec": "3.3",
+      "group": "discovery"
+    },
+    {
+      "id": "tasks",
+      "title": "tasks.endpoint is an HTTPS URL",
+      "status": "pass",
+      "detail": "Lists a tasks endpoint for excluded tasks, skills and feedback.",
+      "spec": "9",
+      "group": "discovery"
+    },
+    {
+      "id": "protected-resource",
+      "title": "Protected resource metadata",
+      "status": "pass",
+      "detail": "resource is https://shop.example.com and the issuer is https://shop.example.com/auth.",
+      "spec": "3.2",
+      "url": "https://shop.example.com/.well-known/oauth-protected-resource",
+      "group": "oauth"
+    },
+    {
+      "id": "issuer-link",
+      "title": "The issuer confirms the domain",
+      "status": "pass",
+      "detail": "issuer matches and protected_resources lists https://shop.example.com.",
+      "spec": "3.2",
+      "url": "https://shop.example.com/.well-known/oauth-authorization-server/auth",
+      "group": "oauth"
+    },
+    {
+      "id": "authorization-server-fields",
+      "title": "Sign-in endpoints are complete",
+      "status": "pass",
+      "detail": "Offers Direct Sign-In, with token refresh and revocation.",
+      "spec": "3.2, 4",
+      "url": "https://shop.example.com/.well-known/oauth-authorization-server/auth",
+      "group": "oauth"
+    },
+    {
+      "id": "test-agent",
+      "title": "Checker signs requests as a personal agent",
+      "status": "pass",
+      "detail": "Probes carry a Session JWT signed by https://shop.example.com/api/pap-checker/client, with aud https://shop.example.com/auth, a fresh User ID and a fresh Session ID.",
+      "spec": "5.2",
+      "group": "session"
+    },
+    {
+      "id": "mcp-https://shop.example.com/mcp",
+      "title": "MCP server answers: shop.example.com",
+      "status": "pass",
+      "detail": "Initialized over Streamable HTTP with a signed Session header: good-mcp 1.2.0, protocol 2025-06-18.",
+      "spec": "7",
+      "url": "https://shop.example.com/mcp",
+      "group": "interfaces"
+    },
+    {
+      "id": "openapi-https://shop.example.com/openapi.json",
+      "title": "OpenAPI description loads: shop.example.com",
+      "status": "pass",
+      "detail": "OpenAPI 3.1.0.",
+      "spec": "7",
+      "url": "https://shop.example.com/openapi.json",
+      "group": "interfaces"
+    },
+    {
+      "id": "conversation-bare-https://shop.example.com/poppy/conversations",
+      "title": "Conversations require a Session header: shop.example.com",
+      "status": "pass",
+      "detail": "A request without the header gets 400 invalid_session.",
+      "spec": "5.3",
+      "url": "https://shop.example.com/poppy/conversations/mchZIu4LOB79p9INGJ2qCQ/events",
+      "group": "interfaces"
+    },
+    {
+      "id": "conversation-signed-https://shop.example.com/poppy/conversations",
+      "title": "Accepts a valid Session header: shop.example.com",
+      "status": "pass",
+      "detail": "Verified the checker's Session JWT and answered conversation_not_found for an unknown conversation, as the spec requires.",
+      "spec": "5.3, 8.13",
+      "url": "https://shop.example.com/poppy/conversations/mchZIu4LOB79p9INGJ2qCQ/events",
+      "group": "session"
+    },
+    {
+      "id": "conversation-forged-https://shop.example.com/poppy/conversations",
+      "title": "Rejects a forged Session header: shop.example.com",
+      "status": "pass",
+      "detail": "A Session JWT with a broken signature gets 400 invalid_session.",
+      "spec": "5.3",
+      "url": "https://shop.example.com/poppy/conversations/mchZIu4LOB79p9INGJ2qCQ/events",
+      "group": "session"
+    },
+    {
+      "id": "conversation-version-https://shop.example.com/poppy/conversations",
+      "title": "Checks Poppy-Version: shop.example.com",
+      "status": "pass",
+      "detail": "A request that declares version 0.0 gets 400 version_unsupported.",
+      "spec": "3.4",
+      "url": "https://shop.example.com/poppy/conversations/mchZIu4LOB79p9INGJ2qCQ/events",
+      "group": "session"
+    },
+    {
+      "id": "tasks-endpoint",
+      "title": "Tasks endpoint answers",
+      "status": "pass",
+      "detail": "1 excluded task(s), and a feedback endpoint.",
+      "spec": "9",
+      "url": "https://shop.example.com/poppy/tasks",
+      "group": "interfaces"
+    },
+    {
+      "id": "browser-session",
+      "title": "Browser-session page loads",
+      "status": "pass",
+      "detail": "Returns an HTML page with the join form.",
+      "spec": "6",
+      "url": "https://shop.example.com/poppy/browser-session",
+      "group": "interfaces"
+    }
+  ]
+}

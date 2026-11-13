@@ -1,0 +1,48 @@
+name: Release
+
+# Push a tag such as v1.0.1 (matching extension/manifest.json) to build the
+# extension zip, attach it to a GitHub release, and, when the Chrome Web Store
+# secrets are set, upload and publish it to the store.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      PUBLISH_TO_STORE: ${{ secrets.CWS_CLIENT_ID != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag matches the manifest version
+        run: |
+          manifest=$(node -p "require('./extension/manifest.json').version")
+          if [ "v${manifest}" != "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match manifest version ${manifest}" >&2
+            exit 1
+          fi
+
+      - name: Build the zip
+        id: build
+        run: echo "zip=$(./scripts/build.sh)" >> "$GITHUB_OUTPUT"
+
+      - name: Create the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.build.outputs.zip }}
+          generate_release_notes: true
+
+      - name: Publish to the Chrome Web Store
+        if: env.PUBLISH_TO_STORE == 'true'
+        env:
+          EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+          PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          ZIP: ${{ steps.build.outputs.zip }}
+        run: npx --yes chrome-webstore-upload-cli@4.0.2 --source "$ZIP"
