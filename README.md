@@ -50,7 +50,7 @@ node scripts/render-assets.cjs     # icons and store screenshots (needs Playwrig
 
 ## Release
 
-Bump `version` in `extension/manifest.json`, then push a matching tag:
+Bump `version` in `extension/manifest.json`, then either push a matching tag or run the **Release** workflow by hand on `main` from the Actions tab, which creates the tag itself:
 
 ```bash
 git tag v1.0.1 && git push origin v1.0.1

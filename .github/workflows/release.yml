@@ -1,11 +1,13 @@
 name: Release
 
-# Push a tag such as v1.0.1 (matching extension/manifest.json) to build the
-# extension zip, attach it to a GitHub release, and, when the Chrome Web Store
+# Push a tag such as v1.0.1 (matching extension/manifest.json), or run this
+# workflow by hand on main, to build the extension zip, attach it to a GitHub
+# release tagged with the manifest version, and, when the Chrome Web Store
 # secrets are set, upload and publish it to the store.
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,13 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check the tag matches the manifest version
+      - name: Work out the release tag
+        id: version
         run: |
           manifest=$(node -p "require('./extension/manifest.json').version")
-          if [ "v${manifest}" != "${GITHUB_REF_NAME}" ]; then
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "v${manifest}" != "${GITHUB_REF_NAME}" ]; then
             echo "Tag ${GITHUB_REF_NAME} does not match manifest version ${manifest}" >&2
             exit 1
           fi
+          echo "tag=v${manifest}" >> "$GITHUB_OUTPUT"
 
       - name: Build the zip
         id: build
@@ -33,6 +37,8 @@ jobs:
       - name: Create the GitHub release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
           files: ${{ steps.build.outputs.zip }}
           generate_release_notes: true
 
