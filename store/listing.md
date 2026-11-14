@@ -12,7 +12,7 @@ Check whether a site works with personal agents through the Personal Agent Proto
 
 ## Description
 
-PAP Checker shows whether the sites you visit work with personal agents such as Muse through the Personal Agent Protocol (Poppy, formerly PAP), version 1.0. Sites that publish a poppy.json get their score on the toolbar icon as you browse.
+PAP Checker shows whether a site works with personal agents such as Muse through the Personal Agent Protocol (Poppy, formerly PAP), version 1.0. Click the icon on any site to check it, or turn on automatic scores to see them on the icon as you browse.
 
 You get a score out of 100 and every check the spec asks for, each with its spec section and what to fix:
 
@@ -23,9 +23,9 @@ You get a score out of 100 and every check the spec asks for, each with its spec
 
 A failure in discovery or sign-in caps the score at 40, because an agent stops there.
 
-Privacy: the extension first asks each site for its own public poppy.json. Only sites that publish one are sent, by hostname, to the checker at waniwani.ai. Nothing else leaves your browser. Open source under the MIT license: github.com/WaniWani-AI/pap-checker
+Privacy: a click sends the current site's hostname to the checker at waniwani.ai. Automatic scores are opt-in, and then only sites that publish a poppy.json are sent. Nothing else leaves your browser. Open source under the MIT license: github.com/WaniWani-AI/pap-checker
 
-Built by Waniwani. A community tool, not affiliated with Sierra, Meta or the Personal Agent Protocol project.
+Made with ❤️ by Waniwani. A community tool, not affiliated with Sierra, Meta or the Personal Agent Protocol project.
 
 ## Category
 
@@ -41,7 +41,9 @@ Check visited sites against the Personal Agent Protocol and show the result.
 
 ## Permission justifications
 
-- **Host permission for https://*/*:** to request each visited site's public /.well-known/poppy.json from the browser, and to read the active tab's address, so the score can show on the icon without a click. No content is read from or injected into pages.
+- **activeTab:** reads the current tab's address when the user clicks the extension, to know which site to check.
+- **Host permission (www.waniwani.ai, waniwani.ai):** sends the hostname to the checker API on waniwani.ai and reads the report.
+- **Optional host permission https://*/*:** requested only when the user clicks "Turn on" for automatic scores. Used to request each visited site's public /.well-known/poppy.json and read the tab's address, so the score shows on the icon without a click. No content is read from or injected into pages.
 - **storage:** keeps each result in session storage for 30 minutes so the popup opens at once. Cleared when the browser closes.
 
 ## Remote code

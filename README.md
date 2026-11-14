@@ -4,7 +4,7 @@
 
 # PAP Checker
 
-**Score any website for the [Personal Agent Protocol](https://personalagentprotocol.org) 1.0, as you browse.**
+**Score any website for the [Personal Agent Protocol](https://personalagentprotocol.org) 1.0 in one click.**
 
 [![Latest release](https://img.shields.io/github/v/release/WaniWani-AI/pap-checker?label=release&color=111111)](https://github.com/WaniWani-AI/pap-checker/releases/latest)
 [![Personal Agent Protocol 1.0](https://img.shields.io/badge/Personal%20Agent%20Protocol-1.0-e5442e)](https://personalagentprotocol.org/docs/spec)
@@ -23,7 +23,7 @@
 
 Personal agents such as Meta's Muse now look for a `poppy.json` on every site they visit. Publishing one is the easy part. What breaks in practice sits behind it: an issuer that doesn't list the domain back, a `www` host the file doesn't name, an endpoint that accepts any Session header. A file can look right and still have a conforming agent stop before its first request.
 
-PAP Checker reads a site the way the 1.0 spec tells a personal agent to, then calls every interface it finds. Sites that publish a `poppy.json` get their score on the toolbar icon without a click. Open the popup for every check, its spec section, and what to fix.
+PAP Checker reads a site the way the 1.0 spec tells a personal agent to, then calls every interface it finds. Click the icon for the score, every check, its spec section and what to fix. Turn on automatic scores and sites that publish a `poppy.json` get their score on the icon as you browse.
 
 ## Try it in 10 seconds
 
@@ -70,7 +70,9 @@ A pass counts 1 and a warning 0.5, over the checks that ran. Skipped checks don'
 
 ## Privacy
 
-On each HTTPS page, the extension asks the site itself for its public `/.well-known/poppy.json`, without cookies. Only when the site answers with a real Poppy document does it send the hostname to `https://www.waniwani.ai/api/pap-checker` for the full check. Most of the web has no such file, so most sites never reach Waniwani. IP addresses, `localhost` and private names such as `*.local` or `*.corp` are never checked automatically.
+The extension installs with narrow permissions: the current tab when you click its icon, and the checker on `waniwani.ai`. Click the icon on any site to check it. That sends the site's hostname to `https://www.waniwani.ai/api/pap-checker`, which runs the checks and returns the report.
+
+Automatic scores are opt-in. Click **Turn on** in the popup and Chrome asks for access to HTTPS sites. From then on, the extension asks each site you visit for its own public `/.well-known/poppy.json`, without cookies, and only sends the hostname to the checker when the site answers with a real Poppy document. Most of the web has no such file, so most sites never reach Waniwani. IP addresses, `localhost` and private names such as `*.local` or `*.corp` are never checked automatically. You can turn it off again from the extension's site access settings in Chrome.
 
 Results stay in session storage for 30 minutes, which is why the popup opens instantly, and they're cleared when the browser closes. No page content, cookies or user identifier ever leave the browser. Full policy in [PRIVACY.md](PRIVACY.md).
 

@@ -1,5 +1,6 @@
-// Checks each HTTPS site the user visits and puts its score on the toolbar
-// icon. It first fetches the site's own /.well-known/poppy.json from the
+// When the user has turned on automatic scores (the optional https://*/*
+// permission), checks each HTTPS site they visit and puts its score on the
+// toolbar icon. It first fetches the site's own /.well-known/poppy.json from the
 // browser; only when that file exists does it send the hostname to the
 // checker API on waniwani.ai for the full check. Results are cached for the
 // browser session, so the popup opens on a stored report.
@@ -130,7 +131,10 @@ function hostOf(url) {
   }
 }
 
+const ALL_SITES = { origins: ["https://*/*"] }
+
 async function checkTab(tabId, url) {
+  if (!(await chrome.permissions.contains(ALL_SITES))) return
   const host = hostOf(url)
   if (!host || !isPublicHostname(host)) {
     await chrome.action.setBadgeText({ tabId, text: "" })
@@ -152,7 +156,8 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
 chrome.runtime.onMessage.addListener((message, _sender, reply) => {
   if (message?.type !== "check" || typeof message.host !== "string") return false
   check(message.host, { force: Boolean(message.force) }).then(async (entry) => {
-    await paintBadge(message.tabId, entry)
+    // A closed or changed tab must not keep the popup waiting.
+    await paintBadge(message.tabId, entry).catch(() => {})
     reply(entry)
   })
   return true

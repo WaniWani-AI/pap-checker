@@ -1,5 +1,7 @@
 // The popup renders the report the background worker cached for the active
-// tab's site, and asks the worker for a check when there is none yet.
+// tab's site, and asks the worker for a check when there is none yet. It
+// also offers to turn on automatic scores, which needs the optional
+// https://*/* permission.
 const SVG_NS = "http://www.w3.org/2000/svg"
 const SPEC_URL = "https://personalagentprotocol.org/docs/spec"
 
@@ -28,6 +30,9 @@ const MINIMAL_DOC = (domain) =>
 
 const content = document.getElementById("content")
 const rerun = document.getElementById("rerun")
+const autoBanner = document.getElementById("auto")
+const autoOn = document.getElementById("auto-on")
+const ALL_SITES = { origins: ["https://*/*"] }
 
 function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag)
@@ -239,6 +244,8 @@ async function check({ force = false } = {}) {
   }
   rerun.hidden = false
 
+  const auto = await chrome.permissions.contains(ALL_SITES)
+  autoBanner.hidden = auto
   const key = `report:${host}`
   const cached = force ? undefined : (await chrome.storage.session.get(key))[key]
   if (cached) {
@@ -250,7 +257,9 @@ async function check({ force = false } = {}) {
   content.setAttribute("aria-busy", "true")
   renderLoading(host)
   try {
-    const entry = await chrome.runtime.sendMessage({ type: "check", host, tabId: tab.id, force })
+    // Without automatic scores the background worker can't pre-check the
+    // site, so a click runs the full check directly.
+    const entry = await chrome.runtime.sendMessage({ type: "check", host, tabId: tab.id, force: force || !auto })
     render(entry, host)
   } catch {
     renderMessage("The checker can't be reached", "Check your connection, then run the check again.")
@@ -258,6 +267,12 @@ async function check({ force = false } = {}) {
     content.setAttribute("aria-busy", "false")
   }
 }
+
+autoOn.addEventListener("click", async () => {
+  // Chrome shows its own permission prompt; nothing changes if the user declines.
+  const granted = await chrome.permissions.request(ALL_SITES)
+  if (granted) autoBanner.hidden = true
+})
 
 rerun.addEventListener("click", () => {
   void check({ force: true })

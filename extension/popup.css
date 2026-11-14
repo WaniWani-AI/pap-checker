@@ -150,3 +150,12 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 a.check-spec { text-decoration: none; }
 a.check-spec:hover { text-decoration: underline; color: var(--ink); }
 .bottom a:hover { text-decoration: underline; }
+
+.auto {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--code-bg);
+}
+.auto p { margin: 0; flex-grow: 1; font-size: 12px; line-height: 17px; color: var(--ink-2); }
+.auto .button { align-self: center; flex-shrink: 0; min-height: 32px; }

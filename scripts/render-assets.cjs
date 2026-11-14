@@ -35,6 +35,7 @@ async function screenshot(browser, name, fixture, tabUrl) {
       tabs: { query: async () => [{ id: 1, url }] },
       storage: { session: { get: async () => ({}) } },
       runtime: { sendMessage: async () => entry },
+      permissions: { contains: async () => true, request: async () => true },
     }
   }, { url: tabUrl, entry })
   // Frame the 380x600 popup on a neutral 1280x800 canvas, as the store expects.

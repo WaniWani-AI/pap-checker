@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "PAP Checker",
   "short_name": "PAP Checker",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Check whether the site you're on works with personal agents through the Personal Agent Protocol (Poppy) 1.0.",
   "homepage_url": "https://github.com/WaniWani-AI/pap-checker",
   "action": {
@@ -24,9 +24,18 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage"],
-  "host_permissions": ["https://*/*"],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.waniwani.ai/*",
+    "https://waniwani.ai/*"
+  ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'"
-  }
+  },
+  "optional_host_permissions": [
+    "https://*/*"
+  ]
 }
