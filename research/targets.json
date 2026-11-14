@@ -1,0 +1,860 @@
+{
+  "study": "Are insurers and banks ready for personal agents?",
+  "spec": "Personal Agent Protocol 1.0",
+  "host_rule": "Each company's bare domain and www host, plus any host the company documents publicly for Poppy.",
+  "targets": [
+    {
+      "name": "JPMorgan Chase",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 1",
+      "hosts": [
+        "chase.com",
+        "www.chase.com"
+      ]
+    },
+    {
+      "name": "Bank of America",
+      "segment": "banking",
+      "groups": [
+        "top_banks",
+        "poppy_partners"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 2; Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "bankofamerica.com",
+        "www.bankofamerica.com"
+      ]
+    },
+    {
+      "name": "Citi",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 3",
+      "hosts": [
+        "citi.com",
+        "www.citi.com"
+      ]
+    },
+    {
+      "name": "Wells Fargo",
+      "segment": "banking",
+      "groups": [
+        "top_banks",
+        "poppy_partners"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 4; Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "wellsfargo.com",
+        "www.wellsfargo.com"
+      ]
+    },
+    {
+      "name": "Goldman Sachs (Marcus)",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 5",
+      "hosts": [
+        "marcus.com",
+        "www.marcus.com"
+      ],
+      "note": "Consumer bank brand of Goldman Sachs Bank USA."
+    },
+    {
+      "name": "U.S. Bank",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 6",
+      "hosts": [
+        "usbank.com",
+        "www.usbank.com"
+      ]
+    },
+    {
+      "name": "Capital One",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 7",
+      "hosts": [
+        "capitalone.com",
+        "www.capitalone.com"
+      ]
+    },
+    {
+      "name": "PNC",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 8",
+      "hosts": [
+        "pnc.com",
+        "www.pnc.com"
+      ]
+    },
+    {
+      "name": "Truist",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 9",
+      "hosts": [
+        "truist.com",
+        "www.truist.com"
+      ]
+    },
+    {
+      "name": "BNY",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 10",
+      "hosts": [
+        "bny.com",
+        "www.bny.com"
+      ]
+    },
+    {
+      "name": "Morgan Stanley",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 11",
+      "hosts": [
+        "morganstanley.com",
+        "www.morganstanley.com"
+      ],
+      "note": "Ranks 11 and 17 are both Morgan Stanley banks; counted once."
+    },
+    {
+      "name": "State Street",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 12",
+      "hosts": [
+        "statestreet.com",
+        "www.statestreet.com"
+      ]
+    },
+    {
+      "name": "TD Bank",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 13",
+      "hosts": [
+        "td.com",
+        "www.td.com"
+      ]
+    },
+    {
+      "name": "Fifth Third",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 14",
+      "hosts": [
+        "53.com",
+        "www.53.com"
+      ]
+    },
+    {
+      "name": "Huntington",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 15",
+      "hosts": [
+        "huntington.com",
+        "www.huntington.com"
+      ]
+    },
+    {
+      "name": "BMO",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 16",
+      "hosts": [
+        "bmo.com",
+        "www.bmo.com"
+      ]
+    },
+    {
+      "name": "First Citizens",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 18",
+      "hosts": [
+        "firstcitizens.com",
+        "www.firstcitizens.com"
+      ]
+    },
+    {
+      "name": "Citizens",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 19",
+      "hosts": [
+        "citizensbank.com",
+        "www.citizensbank.com"
+      ]
+    },
+    {
+      "name": "M&T Bank",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 20",
+      "hosts": [
+        "mtb.com",
+        "www.mtb.com"
+      ]
+    },
+    {
+      "name": "American Express",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 21",
+      "hosts": [
+        "americanexpress.com",
+        "www.americanexpress.com"
+      ]
+    },
+    {
+      "name": "KeyBank",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 22",
+      "hosts": [
+        "key.com",
+        "www.key.com"
+      ]
+    },
+    {
+      "name": "Ally",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 23",
+      "hosts": [
+        "ally.com",
+        "www.ally.com"
+      ]
+    },
+    {
+      "name": "Northern Trust",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 24",
+      "hosts": [
+        "northerntrust.com",
+        "www.northerntrust.com"
+      ]
+    },
+    {
+      "name": "HSBC US",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 25",
+      "hosts": [
+        "us.hsbc.com"
+      ]
+    },
+    {
+      "name": "Regions",
+      "segment": "banking",
+      "groups": [
+        "top_banks"
+      ],
+      "source": "Federal Reserve, U.S. Domestically Chartered Commercial Banks, data as of 30 June 2026, rank 26",
+      "hosts": [
+        "regions.com",
+        "www.regions.com"
+      ]
+    },
+    {
+      "name": "State Farm",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 1",
+      "hosts": [
+        "statefarm.com",
+        "www.statefarm.com"
+      ]
+    },
+    {
+      "name": "Progressive",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 2",
+      "hosts": [
+        "progressive.com",
+        "www.progressive.com"
+      ]
+    },
+    {
+      "name": "GEICO (Berkshire Hathaway)",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers",
+        "poppy_partners"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 3; Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "geico.com",
+        "www.geico.com"
+      ],
+      "note": "Largest consumer insurer in the Berkshire Hathaway group."
+    },
+    {
+      "name": "Allstate",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 4",
+      "hosts": [
+        "allstate.com",
+        "www.allstate.com"
+      ]
+    },
+    {
+      "name": "Travelers",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers",
+        "poppy_partners"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 5; Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "travelers.com",
+        "www.travelers.com"
+      ]
+    },
+    {
+      "name": "Liberty Mutual",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers",
+        "poppy_partners"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 6; Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "libertymutual.com",
+        "www.libertymutual.com"
+      ]
+    },
+    {
+      "name": "USAA",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 7",
+      "hosts": [
+        "usaa.com",
+        "www.usaa.com"
+      ]
+    },
+    {
+      "name": "Chubb",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 8",
+      "hosts": [
+        "chubb.com",
+        "www.chubb.com"
+      ]
+    },
+    {
+      "name": "Farmers",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 9",
+      "hosts": [
+        "farmers.com",
+        "www.farmers.com"
+      ]
+    },
+    {
+      "name": "Zurich North America",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 10",
+      "hosts": [
+        "zurichna.com",
+        "www.zurichna.com"
+      ]
+    },
+    {
+      "name": "The Hartford",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 11",
+      "hosts": [
+        "thehartford.com",
+        "www.thehartford.com"
+      ]
+    },
+    {
+      "name": "American Family",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 12",
+      "hosts": [
+        "amfam.com",
+        "www.amfam.com"
+      ]
+    },
+    {
+      "name": "Auto-Owners",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 13",
+      "hosts": [
+        "auto-owners.com",
+        "www.auto-owners.com"
+      ]
+    },
+    {
+      "name": "Nationwide",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 14",
+      "hosts": [
+        "nationwide.com",
+        "www.nationwide.com"
+      ]
+    },
+    {
+      "name": "AIG",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 15",
+      "hosts": [
+        "aig.com",
+        "www.aig.com"
+      ]
+    },
+    {
+      "name": "CNA",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 16",
+      "hosts": [
+        "cna.com",
+        "www.cna.com"
+      ]
+    },
+    {
+      "name": "Tokio Marine",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 17",
+      "hosts": [
+        "tokiomarinehd.com",
+        "www.tokiomarinehd.com"
+      ],
+      "note": "Group site; US personal lines run under other brands."
+    },
+    {
+      "name": "Erie Insurance",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 18",
+      "hosts": [
+        "erieinsurance.com",
+        "www.erieinsurance.com"
+      ]
+    },
+    {
+      "name": "Fairfax",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 19",
+      "hosts": [
+        "fairfax.ca",
+        "www.fairfax.ca"
+      ]
+    },
+    {
+      "name": "W. R. Berkley",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 20",
+      "hosts": [
+        "berkley.com",
+        "www.berkley.com"
+      ]
+    },
+    {
+      "name": "American Financial Group",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 21",
+      "hosts": [
+        "afginc.com",
+        "www.afginc.com"
+      ]
+    },
+    {
+      "name": "Markel",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 22",
+      "hosts": [
+        "markel.com",
+        "www.markel.com"
+      ]
+    },
+    {
+      "name": "Cincinnati Financial",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 23",
+      "hosts": [
+        "cinfin.com",
+        "www.cinfin.com"
+      ]
+    },
+    {
+      "name": "Auto Club Enterprises (AAA)",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 24",
+      "hosts": [
+        "ace.aaa.com"
+      ],
+      "note": "Automobile Club of Southern California group; its own AAA site."
+    },
+    {
+      "name": "AXA XL",
+      "segment": "insurance",
+      "groups": [
+        "top_insurers"
+      ],
+      "source": "NAIC, 2025 Top 25 Property/Casualty Groups by countrywide direct premiums written, rank 25",
+      "hosts": [
+        "axaxl.com",
+        "www.axaxl.com"
+      ],
+      "note": "AXA's US property/casualty business."
+    },
+    {
+      "name": "Aflac",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "aflac.com",
+        "www.aflac.com"
+      ]
+    },
+    {
+      "name": "Aviva",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "aviva.co.uk",
+        "www.aviva.co.uk"
+      ]
+    },
+    {
+      "name": "Cigna",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "cigna.com",
+        "www.cigna.com"
+      ]
+    },
+    {
+      "name": "Cover Genius",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "covergenius.com",
+        "www.covergenius.com"
+      ]
+    },
+    {
+      "name": "Guardian",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "guardianlife.com",
+        "www.guardianlife.com"
+      ]
+    },
+    {
+      "name": "Insurify",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "insurify.com",
+        "www.insurify.com"
+      ]
+    },
+    {
+      "name": "Kin Insurance",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "kin.com",
+        "www.kin.com"
+      ]
+    },
+    {
+      "name": "Lemonade",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "lemonade.com",
+        "www.lemonade.com"
+      ]
+    },
+    {
+      "name": "Neptune Flood",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "neptuneflood.com",
+        "www.neptuneflood.com"
+      ]
+    },
+    {
+      "name": "The Zebra",
+      "segment": "insurance",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "thezebra.com",
+        "www.thezebra.com"
+      ]
+    },
+    {
+      "name": "BBVA",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "bbva.com",
+        "www.bbva.com"
+      ]
+    },
+    {
+      "name": "Banco Sabadell",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "bancsabadell.com",
+        "www.bancsabadell.com"
+      ]
+    },
+    {
+      "name": "Chime",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "chime.com",
+        "www.chime.com"
+      ]
+    },
+    {
+      "name": "Navy Federal Credit Union",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "navyfederal.org",
+        "www.navyfederal.org"
+      ]
+    },
+    {
+      "name": "Mercury",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "mercury.com",
+        "www.mercury.com",
+        "app.mercury.com"
+      ],
+      "note": "Publishes poppy.json on app.mercury.com, its signed-in app host."
+    },
+    {
+      "name": "SoFi",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "sofi.com",
+        "www.sofi.com"
+      ]
+    },
+    {
+      "name": "Synchrony",
+      "segment": "banking",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Sharing a draft of Personal Agent Protocol, 9 Oct 2026",
+      "hosts": [
+        "synchrony.com",
+        "www.synchrony.com"
+      ]
+    },
+    {
+      "name": "Affirm",
+      "segment": "lending",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "affirm.com",
+        "www.affirm.com"
+      ]
+    },
+    {
+      "name": "Creditas",
+      "segment": "lending",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Releasing Personal Agent Protocol 1.0, 13 Nov 2026",
+      "hosts": [
+        "creditas.com",
+        "www.creditas.com"
+      ]
+    },
+    {
+      "name": "Rocket Mortgage",
+      "segment": "lending",
+      "groups": [
+        "poppy_partners"
+      ],
+      "source": "Sierra, Introducing Personal Agent Protocol, 6 Oct 2026",
+      "hosts": [
+        "rocketmortgage.com",
+        "www.rocketmortgage.com",
+        "rocket.com"
+      ],
+      "note": "Its poppy.json lists an MCP server on rocket.com, the group site."
+    }
+  ]
+}
