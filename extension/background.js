@@ -48,7 +48,7 @@ async function paintBadge(tabId, entry) {
 const PRIVATE_SUFFIXES = [".local", ".internal", ".lan", ".corp", ".home", ".home.arpa", ".intranet", ".localhost", ".test", ".invalid"]
 
 function isPublicHostname(host) {
-  const name = host.replace(/:\d+$/, "").toLowerCase()
+  const name = host.replace(/:\d+$/, "").replace(/\.+$/, "").toLowerCase()
   if (name.startsWith("[") || /^\d+(\.\d+){3}$/.test(name)) return false
   if (!name.includes(".") || name === "localhost") return false
   return !PRIVATE_SUFFIXES.some((suffix) => name.endsWith(suffix))
@@ -118,10 +118,13 @@ function check(host, { force = false } = {}) {
   return job
 }
 
+/** The tab's host without trailing dots, so "wiki.corp." and "wiki.corp" are one name. */
 function hostOf(url) {
   try {
     const parsed = new URL(url ?? "")
-    return parsed.protocol === "https:" ? parsed.host : undefined
+    if (parsed.protocol !== "https:") return undefined
+    const name = parsed.hostname.replace(/\.+$/, "").toLowerCase()
+    return parsed.port ? `${name}:${parsed.port}` : name
   } catch {
     return undefined
   }

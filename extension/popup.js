@@ -219,7 +219,9 @@ async function activeTab() {
 function hostOf(url) {
   try {
     const parsed = new URL(url ?? "")
-    return parsed.protocol === "https:" ? parsed.host : undefined
+    if (parsed.protocol !== "https:") return undefined
+    const name = parsed.hostname.replace(/\.+$/, "").toLowerCase()
+    return parsed.port ? `${name}:${parsed.port}` : name
   } catch {
     return undefined
   }
