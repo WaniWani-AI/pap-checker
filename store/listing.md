@@ -50,7 +50,7 @@ No. All code ships in the package.
 
 ## Data usage
 
-Collects: website content? No. Web history? Only in this narrow form: the hostname of a visited site is sent to the checker when that site publishes a poppy.json, to provide the extension's single purpose. Not sold, not used for anything else.
+Tick **Web history**, and only that. The extension sends the hostname of a visited site to the checker when that site publishes a poppy.json, which counts as a narrow form of browsing history. Then tick all three certifications: not sold to third parties, not used for purposes unrelated to the single purpose, not used for creditworthiness or lending.
 
 ## Privacy policy URL
 
@@ -59,4 +59,5 @@ https://github.com/WaniWani-AI/pap-checker/blob/main/PRIVACY.md
 ## Assets
 
 - Icon: `extension/icons/icon-128.png`
+- Small promo tile (440×280): `store/promo-small-440x280.png`
 - Screenshots (1280×800): `store/screenshot-ready.png`, `store/screenshot-problems.png`, `store/screenshot-absent.png`
