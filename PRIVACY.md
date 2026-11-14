@@ -1,12 +1,12 @@
 # Privacy policy
 
-Last updated: 14 November 2026 (version 1.2.0)
+Last updated: 14 November 2026 (version 1.2.1)
 
 PAP Checker is a Chrome extension published by Waniwani. This page says what it collects and why.
 
 ## What the extension sends, and to whom
 
-**When you click the extension's icon**, it reads the current tab's address through Chrome's `activeTab` permission and sends the hostname (for example `shop.example.com`) to `https://www.waniwani.ai/api/pap-checker` for the check.
+**When you click the extension's icon**, it reads the current tab's address through Chrome's `activeTab` permission and sends the hostname (for example `shop.example.com`) to `https://www.waniwani.ai/api/pap-checker` for the check. Local and intranet addresses (IP addresses, `localhost`, names without a dot, and private names such as `*.local` or `*.corp`) are never sent, even on a click.
 
 **Automatic scores are off until you turn them on** with the **Turn on** button in the popup, which asks Chrome for access to HTTPS sites. Once on, when a page finishes loading, the extension asks that site for its own public `/.well-known/poppy.json`, without cookies. That request goes from your browser to the site you are already visiting. Only when the site answers with a JSON document that carries a `protocol_version` does the extension send the site's hostname to the checker. Sites without the file, which is most of the web, are never sent to Waniwani. Neither are IP addresses, `localhost`, names without a dot, or private names such as `*.local`, `*.internal`, `*.lan` and `*.corp`. You can turn automatic scores off in Chrome's site access settings for the extension.
 

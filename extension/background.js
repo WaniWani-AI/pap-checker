@@ -155,6 +155,15 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
 
 chrome.runtime.onMessage.addListener((message, _sender, reply) => {
   if (message?.type !== "check" || typeof message.host !== "string") return false
+  // Private and intranet names never leave the browser, even on a click.
+  if (!isPublicHostname(message.host)) {
+    reply({
+      kind: "error",
+      title: "Only public sites can be checked",
+      message: "This looks like a local or intranet address. Personal agents reach public sites, and the checker never receives private names.",
+    })
+    return false
+  }
   check(message.host, { force: Boolean(message.force) }).then(async (entry) => {
     // A closed or changed tab must not keep the popup waiting.
     await paintBadge(message.tabId, entry).catch(() => {})
