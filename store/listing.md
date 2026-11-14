@@ -12,7 +12,7 @@ Check whether a site works with personal agents through the Personal Agent Proto
 
 ## Description
 
-Open PAP Checker on any HTTPS site to see whether personal agents such as Muse can work with it through the Personal Agent Protocol (Poppy, formerly PAP), version 1.0.
+PAP Checker shows whether the sites you visit work with personal agents such as Muse through the Personal Agent Protocol (Poppy, formerly PAP), version 1.0. Sites that publish a poppy.json get their score on the toolbar icon as you browse.
 
 You get a score out of 100 and every check the spec asks for, each with its spec section and what to fix:
 
@@ -23,7 +23,7 @@ You get a score out of 100 and every check the spec asks for, each with its spec
 
 A failure in discovery or sign-in caps the score at 40, because an agent stops there.
 
-The extension only runs when you click it, and it sends nothing but the site's hostname to the checker at waniwani.ai. Open source under the MIT license: github.com/WaniWani-AI/pap-checker
+Privacy: the extension first asks each site for its own public poppy.json. Only sites that publish one are sent, by hostname, to the checker at waniwani.ai. Nothing else leaves your browser. Open source under the MIT license: github.com/WaniWani-AI/pap-checker
 
 Built by Waniwani. A community tool, not affiliated with Sierra, Meta or the Personal Agent Protocol project.
 
@@ -37,12 +37,12 @@ English
 
 ## Single purpose
 
-Check the site in the current tab against the Personal Agent Protocol and show the result.
+Check visited sites against the Personal Agent Protocol and show the result.
 
 ## Permission justifications
 
-- **activeTab:** reads the current tab's address when the user clicks the extension, to know which site to check.
-- **Host permission for waniwani.ai:** sends the hostname to the checker API at www.waniwani.ai and reads the report.
+- **Host permission for https://*/*:** to request each visited site's public /.well-known/poppy.json from the browser, and to read the active tab's address, so the score can show on the icon without a click. No content is read from or injected into pages.
+- **storage:** keeps each result in session storage for 30 minutes so the popup opens at once. Cleared when the browser closes.
 
 ## Remote code
 
@@ -50,7 +50,7 @@ No. All code ships in the package.
 
 ## Data usage
 
-Collects: website content? No. Web history? No. The hostname of the current tab is sent to the checker when the user clicks the extension, to provide the extension's single purpose. Not sold, not used for anything else.
+Collects: website content? No. Web history? Only in this narrow form: the hostname of a visited site is sent to the checker when that site publishes a poppy.json, to provide the extension's single purpose. Not sold, not used for anything else.
 
 ## Privacy policy URL
 

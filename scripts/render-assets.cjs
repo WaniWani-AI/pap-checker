@@ -1,5 +1,5 @@
 // Renders the PNG icons from icons/icon.svg and the Chrome Web Store
-// screenshots from fixture reports, with the API and the chrome.* calls stubbed.
+// screenshots from fixture reports, with the chrome.* calls stubbed.
 // Run: node scripts/render-assets.cjs  (needs Playwright with Chromium)
 const { chromium } = require("playwright")
 const fs = require("node:fs")
@@ -26,18 +26,17 @@ async function icons(browser) {
 async function screenshot(browser, name, fixture, tabUrl) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 800 } })
   const page = await context.newPage()
-  await page.addInitScript((url) => {
+  const host = new URL(tabUrl).host
+  const entry = fixture === null
+    ? { kind: "report", report: { verdict: "absent", domain: host, score: 0 } }
+    : { kind: "report", report: JSON.parse(fs.readFileSync(fixture, "utf8")) }
+  await page.addInitScript(({ url, entry }) => {
     globalThis.chrome = {
       tabs: { query: async () => [{ id: 1, url }] },
-      action: { setBadgeText: async () => {}, setBadgeBackgroundColor: async () => {}, setBadgeTextColor: async () => {} },
+      storage: { session: { get: async () => ({}) } },
+      runtime: { sendMessage: async () => entry },
     }
-  }, tabUrl)
-  await page.route("https://www.waniwani.ai/api/pap-checker**", (route) =>
-    fixture === null
-      ? route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ verdict: "absent", score: 0, domain: new URL(tabUrl).host, checks: [], summary: {} }) })
-      : route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: fs.readFileSync(fixture, "utf8") }),
-  )
-  await page.route("file://**/popup.html", (route) => route.continue())
+  }, { url: tabUrl, entry })
   // Frame the 380x600 popup on a neutral 1280x800 canvas, as the store expects.
   await page.goto(`file://${path.join(ext, "popup.html")}`)
   await page.waitForTimeout(900)

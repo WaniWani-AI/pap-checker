@@ -1,9 +1,7 @@
-// The popup sends the active tab's hostname to the checker API on
-// waniwani.ai when it opens, and renders the report it gets back. Nothing
-// runs in the background and nothing is stored.
-
-const API = "https://www.waniwani.ai/api/pap-checker"
+// The popup renders the report the background worker cached for the active
+// tab's site, and asks the worker for a check when there is none yet.
 const SVG_NS = "http://www.w3.org/2000/svg"
+const SPEC_URL = "https://personalagentprotocol.org/docs/spec"
 
 const GROUPS = [
   { id: "discovery", name: "Discovery" },
@@ -148,7 +146,15 @@ function renderReport(report) {
                 check.title,
               ]),
               el("span", { class: "check-detail", text: check.detail }),
-              check.spec ? el("span", { class: "check-spec", text: `Spec §${check.spec}` }) : "",
+              check.spec
+                ? el("a", {
+                    class: "check-spec",
+                    href: SPEC_URL,
+                    target: "_blank",
+                    rel: "noopener",
+                    text: `Spec §${check.spec}`,
+                  })
+                : "",
             ]),
           ]),
         ),
@@ -199,16 +205,10 @@ function renderLoading(domain) {
   )
 }
 
-async function setBadge(tabId, report) {
-  if (!globalThis.chrome?.action || tabId === undefined) return
-  if (report.verdict === "absent") {
-    await chrome.action.setBadgeText({ tabId, text: "" })
-    return
-  }
-  const color = report.score >= 90 ? "#1e8e3e" : report.score >= 60 ? "#b7791f" : "#c62828"
-  await chrome.action.setBadgeBackgroundColor({ tabId, color })
-  await chrome.action.setBadgeTextColor?.({ tabId, color: "#ffffff" })
-  await chrome.action.setBadgeText({ tabId, text: String(report.score) })
+function render(entry, host) {
+  if (entry.kind === "error") renderMessage(entry.title, entry.message)
+  else if (entry.report.verdict === "absent") renderAbsent(host)
+  else renderReport(entry.report)
 }
 
 async function activeTab() {
@@ -216,42 +216,40 @@ async function activeTab() {
   return tab
 }
 
-async function check() {
-  const tab = await activeTab()
-  let url
+function hostOf(url) {
   try {
-    url = new URL(tab?.url ?? "")
+    const parsed = new URL(url ?? "")
+    return parsed.protocol === "https:" ? parsed.host : undefined
   } catch {
-    url = undefined
+    return undefined
   }
-  if (!url || url.protocol !== "https:") {
+}
+
+/** Shows the cached report at once, then asks the background worker for a fresh one when needed. */
+async function check({ force = false } = {}) {
+  const tab = await activeTab()
+  const host = hostOf(tab?.url)
+  if (!host) {
     rerun.hidden = true
     content.setAttribute("aria-busy", "false")
     renderMessage("Open a website to check it", "PAP Checker tests the HTTPS site in the current tab.")
     return
   }
-
-  const domain = url.host
   rerun.hidden = false
-  content.setAttribute("aria-busy", "true")
-  renderLoading(domain)
 
+  const key = `report:${host}`
+  const cached = force ? undefined : (await chrome.storage.session.get(key))[key]
+  if (cached) {
+    render(cached, host)
+    content.setAttribute("aria-busy", "false")
+    return
+  }
+
+  content.setAttribute("aria-busy", "true")
+  renderLoading(host)
   try {
-    const response = await fetch(`${API}?domain=${encodeURIComponent(domain)}`)
-    const body = await response.json().catch(() => undefined)
-    if (response.status === 429) {
-      const wait = response.headers.get("retry-after") ?? "a few"
-      renderMessage("Too many checks", `Wait ${wait} seconds, then run the check again.`)
-      return
-    }
-    if (!response.ok || !body || typeof body.score !== "number") {
-      const message = body?.error?.message ?? `The checker answered HTTP ${response.status}.`
-      renderMessage("The check didn't finish", message)
-      return
-    }
-    if (body.verdict === "absent") renderAbsent(domain)
-    else renderReport(body)
-    await setBadge(tab.id, body)
+    const entry = await chrome.runtime.sendMessage({ type: "check", host, tabId: tab.id, force })
+    render(entry, host)
   } catch {
     renderMessage("The checker can't be reached", "Check your connection, then run the check again.")
   } finally {
@@ -260,7 +258,7 @@ async function check() {
 }
 
 rerun.addEventListener("click", () => {
-  void check()
+  void check({ force: true })
 })
 
 void check()

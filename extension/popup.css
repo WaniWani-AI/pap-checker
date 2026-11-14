@@ -137,13 +137,16 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 
 .bottom {
   border-top: 1px solid var(--line);
-  padding: 6px 16px;
+  padding: 2px 8px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 .bottom a {
-  display: inline-flex; align-items: center;
-  min-height: 32px; padding: 0 8px;
-  font-size: 12px; font-weight: 500; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 3px;
+  min-height: 28px; padding: 0 8px;
+  font-size: 11px; color: var(--muted); text-decoration: none;
 }
+.bottom a:hover { color: var(--ink); }
+a.check-spec { text-decoration: none; }
+a.check-spec:hover { text-decoration: underline; color: var(--ink); }
 .bottom a:hover { text-decoration: underline; }

@@ -2,7 +2,7 @@
 
 A Chrome extension that tells you whether the site in your current tab works with personal agents through the [Personal Agent Protocol](https://personalagentprotocol.org) (Poppy, formerly PAP), version 1.0.
 
-Open the popup on any HTTPS site. You get a score out of 100 and every check, with the spec section it comes from and what to fix.
+Browse as usual: sites that publish a `poppy.json` get their score on the toolbar icon. Click it for every check, with the spec section it comes from and what to fix.
 
 ![PAP Checker on a site with problems](store/screenshot-problems.png)
 
@@ -21,7 +21,7 @@ A pass counts 1 and a warning 0.5, over the checks that ran. Skipped checks don'
 
 ## Privacy
 
-The extension asks for `activeTab`, so it sees the current tab's address only when you click its icon. It then sends that hostname to `https://www.waniwani.ai/api/pap-checker`, which runs the checks against the site's public endpoints and returns the report. Nothing runs in the background, nothing is stored, and no other data leaves your browser. Details in [PRIVACY.md](PRIVACY.md).
+The score appears on the toolbar icon without a click. On each HTTPS page, the extension fetches the site's own `/.well-known/poppy.json`. Only when that file exists does it send the hostname to `https://www.waniwani.ai/api/pap-checker` for the full check, so sites without the file never reach Waniwani. Results stay in session storage for 30 minutes, which is why the popup opens instantly. Nothing else leaves your browser. Details in [PRIVACY.md](PRIVACY.md).
 
 The same report is available without the extension:
 
