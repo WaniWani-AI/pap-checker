@@ -1,0 +1,29 @@
+name: A check is wrong or missing
+description: The checker disagrees with the spec, or misses something the spec requires.
+labels: ["checks"]
+body:
+  - type: input
+    id: domain
+    attributes:
+      label: Domain you checked
+      placeholder: example.com
+    validations:
+      required: true
+  - type: input
+    id: check
+    attributes:
+      label: Check title as shown in the popup
+      placeholder: The issuer confirms the domain
+  - type: input
+    id: spec
+    attributes:
+      label: Spec section
+      placeholder: "3.2"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What the checker says, and what the spec says instead
+    validations:
+      required: true
