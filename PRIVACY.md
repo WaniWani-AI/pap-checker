@@ -8,7 +8,7 @@ PAP Checker is a Chrome extension published by Waniwani. This page says what it 
 
 When a page finishes loading in an HTTPS tab, the extension asks that site for its own `/.well-known/poppy.json`, the public file the Personal Agent Protocol defines. That request goes from your browser to the site you are already visiting, without cookies.
 
-Only when the site publishes that file does the extension send the site's hostname (for example `shop.example.com`) to `https://www.waniwani.ai/api/pap-checker` for the full check. Sites without the file, which is most of the web, are never sent to Waniwani. The extension sends nothing else: no full URL, no page content, no cookies and no identifier for you or your browser.
+Only when the site answers with a JSON document that carries a `protocol_version` does the extension send the site's hostname (for example `shop.example.com`) to `https://www.waniwani.ai/api/pap-checker` for the full check. Sites without the file, which is most of the web, are never sent to Waniwani. Neither are IP addresses, `localhost`, names without a dot, or private names such as `*.local`, `*.internal`, `*.lan` and `*.corp`: the extension doesn't check those automatically at all. The extension sends nothing else: no full URL, no page content, no cookies and no identifier for you or your browser.
 
 Results are kept in the browser's session storage for 30 minutes, so the popup opens at once, and are cleared when the browser closes. Clicking the re-run button sends the hostname for a fresh full check.
 

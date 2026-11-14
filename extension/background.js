@@ -40,7 +40,26 @@ async function paintBadge(tabId, entry) {
   await chrome.action.setBadgeText({ tabId, text: String(score) })
 }
 
-/** True when the site serves something at the well-known path. */
+/**
+ * Hosts the automatic check never touches: IP addresses, single-label names
+ * and private suffixes. Sending those to the checker would leak intranet
+ * names, and the checker refuses private addresses anyway.
+ */
+const PRIVATE_SUFFIXES = [".local", ".internal", ".lan", ".corp", ".home", ".home.arpa", ".intranet", ".localhost", ".test", ".invalid"]
+
+function isPublicHostname(host) {
+  const name = host.replace(/:\d+$/, "").toLowerCase()
+  if (name.startsWith("[") || /^\d+(\.\d+){3}$/.test(name)) return false
+  if (!name.includes(".") || name === "localhost") return false
+  return !PRIVATE_SUFFIXES.some((suffix) => name.endsWith(suffix))
+}
+
+/**
+ * True only when the site serves a JSON object with a protocol_version at
+ * the well-known path. Sites that answer every path with their HTML, or with
+ * a 403 from a firewall, don't count, so their hostnames never leave the
+ * browser.
+ */
 async function hasPoppyJson(host) {
   try {
     const response = await fetch(`https://${host}/.well-known/poppy.json`, {
@@ -48,7 +67,9 @@ async function hasPoppyJson(host) {
       cache: "no-store",
       redirect: "follow",
     })
-    return response.status !== 404 && response.status !== 410
+    if (!response.ok) return false
+    const body = await response.json()
+    return typeof body === "object" && body !== null && typeof body.protocol_version === "string"
   } catch {
     return false
   }
@@ -108,7 +129,7 @@ function hostOf(url) {
 
 async function checkTab(tabId, url) {
   const host = hostOf(url)
-  if (!host) {
+  if (!host || !isPublicHostname(host)) {
     await chrome.action.setBadgeText({ tabId, text: "" })
     return
   }
